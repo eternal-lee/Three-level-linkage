@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0;}
+			.box{margin:50px auto;text-align:center;}
+			select{height:30px;padding:6px 8px;width:200px;}
+			span{display:inline-block;line-height:30px;padding-left:8px;}
+			.box .address{margin-top:20px;}
+			
+			b{color:red;}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<span>省&emsp;份：</span><select id="Cont"><option value="0">---请选择省份---</option></select>
+			<span>城&emsp;市：</span><select id="City" disabled="true"><option value="0">---请选择城市---</option></select>
+			<span>区&nbsp;/&nbsp;县：</span><select id="Sent" disabled="true"><option>---请选择区/县---</option></select>
+			<div id="address" class="address">地址：<b>未完成...</b></div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js" ></script>
+		<script type="text/javascript" src="js/area_array.js" ></script>
+		<script>
+			// 获取地址
+			var address = '';
+			//   获取省份
+			var provice = nc_a[0];
+			for(var i=0;i<provice.length;i++){
+				var cont = '<option value='+provice[i][0]+'>'+provice[i][1]+'</option>';
+				$("#Cont").append(cont);
+			}
+			
+			//  获取  城市
+			$("#Cont").change(function(){
+				if($("#Cont").val()==0){
+					$("#City").attr("disabled",true)
+					$("#Sent").attr("disabled",true)
+					$("#City").html("<option value='0'>---请选择城市---</option>")
+					$("#Sent").html("<option>---请选择区/镇---</option>")
+				}else{
+					$("#City").html("<option value='0'>---请选择城市---</option>")
+					$("#Sent").html("<option>---请选择区/镇---</option>");
+					var contVal = $("#Cont").val();
+					$("#City").attr("disabled",false)
+					var cityArr = nc_a[contVal]
+					for(var i=0;i<cityArr.length;i++){
+						var city = '<option value='+cityArr[i][0]+'>'+cityArr[i][1]+'</option>';
+						$("#City").append(city)
+					}
+					//   select 被选中状态时获取当前 的省份值
+					var test = $("#Cont option:selected").html();
+				}
+			})
+			//  获取市区/镇
+			$("#City").change(function(){
+				if($("#City").val()==0){
+					$("#Sent").attr("disabled",true)
+					$("#Sent").html("<option value='0'>---请选择区/镇---</option>");
+				}else{
+					$("#Sent").html("<option value='0'>---请选择区/镇---</option>");
+					var cityVal = $("#City").val();
+					$("#Sent").attr("disabled",false);
+					var sentArr = nc_a[cityVal];
+					for(var i=0;i<sentArr.length;i++){
+						var sent = '<option>'+sentArr[i][1]+'</option>'
+						$("#Sent").append(sent);
+					}
+				}
+			})
+		</script>
+		
+		
+	</body>
+</html>
