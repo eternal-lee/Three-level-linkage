@@ -44,6 +44,7 @@
 					$("#Sent").html("<option>---请选择区/镇---</option>");
 					var contVal = $("#Cont").val();
 					$("#City").attr("disabled",false)
+					$("#Sent").attr("disabled",true)
 					var cityArr = nc_a[contVal]
 					for(var i=0;i<cityArr.length;i++){
 						var city = '<option value='+cityArr[i][0]+'>'+cityArr[i][1]+'</option>';
