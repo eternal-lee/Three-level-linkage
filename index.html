@@ -9,8 +9,7 @@
 			select{height:30px;padding:6px 8px;width:200px;}
 			span{display:inline-block;line-height:30px;padding-left:8px;}
 			.box .address{margin-top:20px;}
-			
-			b{color:red;}
+			.btn{height:20px;background:#fff;text-align:center;line-height:20px;outline:none;padding:5px;}
 		</style>
 	</head>
 	<body>
@@ -18,7 +17,10 @@
 			<span>省&emsp;份：</span><select id="Cont"><option value="0">---请选择省份---</option></select>
 			<span>城&emsp;市：</span><select id="City" disabled="true"><option value="0">---请选择城市---</option></select>
 			<span>区&nbsp;/&nbsp;县：</span><select id="Sent" disabled="true"><option>---请选择区/县---</option></select>
-			<div id="address" class="address">地址：<b>未完成...</b></div>
+			<div>
+				<button id="btn" class="btn">获取地址</button>
+				<span id="address" class="address">地址：</span>
+			</div>
 		</div>
 		<script type="text/javascript" src="js/jquery-1.11.2.min.js" ></script>
 		<script type="text/javascript" src="js/area_array.js" ></script>
@@ -68,6 +70,21 @@
 						var sent = '<option>'+sentArr[i][1]+'</option>'
 						$("#Sent").append(sent);
 					}
+				}
+			})
+			
+			$("#btn").click(function(){
+				var ContVal = $("#Cont option:selected").html(),
+					CityVal = $("#City option:selected").html(),
+					SentVal = $("#Sent option:selected").html(),
+					val1 = $("#Cont").val(),
+					val2 = $("#City").val(),
+					val3 = $("#Sent").val();
+				if(val1!=0&&val2!=0&&val3!=0){
+					$("#address").html("地址：")
+					$("#address").append(ContVal+"&emsp;"+CityVal+"&emsp;"+SentVal);
+				}else{
+					$("#address").html("地址：请选择地址")
 				}
 			})
 		</script>
