@@ -90,7 +90,11 @@
 				if(val1!=0&&val2!=0&&val3!=0){
 					$("#address").html("地址：")
 					$("#address").append(ContVal+"&emsp;"+CityVal+"&emsp;"+SentVal);
-				}else{
+				}else if(val1!=0&&val2!=0){
+					$("#address").html("地址：")
+					$("#address").append(ContVal+"&emsp;"+CityVal);
+				}
+				else{
 					$("#address").html("地址：请选择地址")
 				}
 			})
