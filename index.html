@@ -9,14 +9,15 @@
 			select{height:30px;padding:6px 8px;width:200px;}
 			span{display:inline-block;line-height:30px;padding-left:8px;}
 			.box .address{margin-top:20px;}
-			.btn{height:20px;background:#fff;text-align:center;line-height:20px;outline:none;padding:5px;}
+			.btn{height:30px;background:#fff;text-align:center;line-height:20px;outline:none;padding:5px;}
+			.hide{display:none;}
 		</style>
 	</head>
 	<body>
 		<div class="box">
-			<span>省&emsp;份：</span><select id="Cont"><option value="0">---请选择省份---</option></select>
-			<span>城&emsp;市：</span><select id="City" disabled="true"><option value="0">---请选择城市---</option></select>
-			<span>区&nbsp;/&nbsp;县：</span><select id="Sent" disabled="true"><option>---请选择区/县---</option></select>
+			<label><span>省&emsp;份：</span><select id="Cont"><option value="0">---请选择省份---</option></select></label>
+			<label><span>城&emsp;市：</span><select id="City" disabled="true"><option value="0">---请选择城市---</option></select></label>
+			<label><span>区&nbsp;/&nbsp;县：</span><select id="Sent" disabled="true"><option>---请选择区/县---</option></select></label>
 			<div>
 				<button id="btn" class="btn">获取地址</button>
 				<span id="address" class="address">地址：</span>
@@ -66,9 +67,15 @@
 					var cityVal = $("#City").val();
 					$("#Sent").attr("disabled",false);
 					var sentArr = nc_a[cityVal];
-					for(var i=0;i<sentArr.length;i++){
-						var sent = '<option>'+sentArr[i][1]+'</option>'
-						$("#Sent").append(sent);
+					if(sentArr==undefined){
+						console.log(11)
+						$("label").eq(2).addClass("hide");
+					}else{
+						$("label").eq(2).removeClass("hide");
+						for(var i=0;i<sentArr.length;i++){
+							var sent = '<option>'+sentArr[i][1]+'</option>'
+							$("#Sent").append(sent);
+						}
 					}
 				}
 			})
